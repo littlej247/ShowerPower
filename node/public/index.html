@@ -8,55 +8,47 @@
 </head>
 
 <body>
- <!-- <div id="greeting"></div> -->
- <div> <h3>PreHeat System</h3>
-  <table>
-    <tr>
-      <th>Parameter</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>PDT</td>
-      <td>25</td>
-      <td><b>P</b>reHeat <b>D</b>efault <b>T</b>empratur in Celsious</td>
-    </tr>
-    <tr>
-      <td>PWD</td>
-      <td>7</td>
-      <td><b>P</b>reHeat <b>W</b>atch<b>D</b>og timer in minutes</td>
-    </tr>
-    <tr>
-      <td>PSI</td>
-      <td>0</td>
-      <td><b>P</b>reHeat <b>S</b>ensor <b>I</b>nput in volts from 0-5</td>
-    </tr>
-    <tr>
-      <td>PST</td>
-      <td>0</td>
-      <td><b>P</b>reHeat <b>S</b>ensor <b>T</b>empratur as calculated in C</td>
-    </tr>
-        <tr>
-      <td>PPO</td>
-      <td>0</td>
-      <td><b>P</b>reHeat <b>P</b>ump <b>P</b>utput, 0 = OFF, 1 = ON</td>
-    </tr>
-  </table>
-</div>
-<br>
-<input type="checkbox" id="filter">Filter Incoming Data :) <br>
+  <span id="connected"></span>
+  <div> <h3>PreHeat System</h3>
+    <table>
+      <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>PDT</td>
+        <td>25</td>
+        <td><b>P</b>reHeat <b>D</b>efault <b>T</b>empratur in Celsious</td>
+      </tr>
+      <tr>
+        <td>PWD</td>
+        <td>7</td>
+        <td><b>P</b>reHeat <b>W</b>atch<b>D</b>og timer in minutes</td>
+      </tr>
+      <tr>
+        <td>PSI</td>
+        <td>0</td>
+        <td><b>P</b>reHeat <b>S</b>ensor <b>I</b>nput in volts from 0-5</td>
+      </tr>
+      <tr>
+        <td>PST</td>
+        <td>0</td>
+        <td><b>P</b>reHeat <b>S</b>ensor <b>T</b>empratur as calculated in C</td>
+      </tr>
+      <tr>
+        <td>PPO</td>
+        <td>0</td>
+        <td><b>P</b>reHeat <b>P</b>ump <b>P</b>utput, 0 = OFF, 1 = ON</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <input type="checkbox" id="filter">Filter Incoming Data :) <br>
   <textarea id="logCommand" rows="15" style="width: 100%" readonly></textarea><br>
-  <input type="text" id="command" value="">
-  <input type="button" id="sendCommand" value="Submit"> 
-  
-<script>
-function myTestFunction(boobies){
-console.log("I don't love: " + boobies);
-}
-</script>
+  <input type="text" id="command" value=""> 
 
 
-  
   <script src="/socket.io/socket.io.js"></script>
   <script src="client.js"></script>
 </body>

@@ -18,7 +18,7 @@ void loop() {
 
 void recvWithEndMarker() {
   static byte ndx = 0;
-  char endMarker = '\r';  //\n for newline and \r for carriage return
+  char endMarker = '\n';  //\n for newline and \r for carriage return
   char rc;
   
   while (Serial.available() > 0 && newData == false) {
@@ -59,8 +59,8 @@ void parsInput(){
 
 void showNewData() {
   if (newData == true) {
-    Serial.print("This just in ... ");
-    Serial.println(receivedChars);
+    //Serial.print("This just in ... ");
+    //Serial.println(receivedChars);
     newData = false;
   }
 }
@@ -74,12 +74,12 @@ void inputCommands(String par, String val) {
         
       } else {
         digitalWrite(12, val.toInt());
-        //Serial.println("<"+val+">");
+        Serial.println(par+"="+digitalRead(12));
         
       }
       
     } else if (par == "ech"){
-    Serial.println(val);
+      Serial.println(val);
     } else {
       Serial.println("<Par not found!>");
     } 

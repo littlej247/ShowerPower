@@ -10,7 +10,7 @@ const Readline = SerialPort.parsers.Readline;
 const port = new SerialPort('/dev/ttyUSB0');
 const parser = new Readline();
 port.pipe(parser);
-//port.on('data', sendDataToWebClient);
+port.on('data', sendDataToWebClient);
 
 server.listen(80)
 //app.use(express.static('public'), function (req, res) { console.log('app.use called'); });
@@ -31,15 +31,12 @@ app.use(express.static('public'), function (req, res) { console.log('app.use cal
 //Send data from Web client to USB
 io.on('connection', function (socket) {
 
-  port.on('data', sendDataToWebClient); //testing usb connection delay
+  //port.on('data', sendDataToWebClient); //testing usb connection delay
 
-
-
-
-  socket.emit('news', { data: '<connected to node>'});
-  socket.on('my other event', function (data) {
+  socket.emit('news', { data: '<connected to node>\n'});
+  socket.on('command', function (data) {
     console.log('sending data from web client to USB: ' + data);
-    port.write(data+'\r');
+    port.write(data+'\n');
   });
 
 });
