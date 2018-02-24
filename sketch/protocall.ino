@@ -23,7 +23,7 @@ void recvWithEndMarker() {
   
   while (Serial.available() > 0 && newData == false) {
     rc = Serial.read();
-    Serial.print(rc,HEX);
+    //Serial.print(rc,HEX);
     if (rc != endMarker) {
       receivedChars[ndx] = rc;
       ndx++;
@@ -68,10 +68,19 @@ void showNewData() {
 void inputCommands(String par, String val) {
     if (par == "led"){
       //Serial.println("i'm reading!");
-      digitalWrite(12, val.toInt());
+      if (val == par){
+        //Serial.println("<requested current value>");
+        Serial.println(par+"="+digitalRead(12));
+        
+      } else {
+        digitalWrite(12, val.toInt());
+        //Serial.println("<"+val+">");
+        
+      }
+      
     } else if (par == "ech"){
     Serial.println(val);
     } else {
-      Serial.println("Par not found!");
+      Serial.println("<Par not found!>");
     } 
 }
