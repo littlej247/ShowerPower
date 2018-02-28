@@ -22,13 +22,8 @@ function myCallback(myMessage){
 //Receiving data via socket.io
 var socket = io.connect(window.location.href);
 socket.on('news', function (data) {
-   var splitData = data.data.split("=",2);
-   var updated = tableManager.updateValue(splitData[0],splitData[1]);
-   if (!document.getElementById("filter").checked || !updated ){
-       logCommand.add(String(data.data));
-   }
-   console.log('Data Received: ' + data.data);
-
+   logCommand.newData(data.data);
+   //console.log('Data Received: ' + data.data);
 });
 
 //Transmit command on Enter KeyDown via socket.io
@@ -49,4 +44,16 @@ document.getElementById("command").onkeydown = function() {
      this.value = '';
    }
 };
+
+//Disconnect Message
+socket.on('disconnect', (reason) => {
+   console.log("Disconnected from NODE.  Reason: " + reason);
+   document.getElementById("connected").innerHTML = "Status: Disconnected from NODE.  Reason: " + reason;
+});
+
+//
+socket.on('connect', () => {
+   console.log("Connected to NODE.");
+   document.getElementById("connected").innerHTML = "Status: Connected to NODE.";
+});
 

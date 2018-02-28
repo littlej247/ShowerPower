@@ -2,6 +2,8 @@
 var logCommand = {
    element: document.getElementById("logCommand"),
 
+   buffer: "",
+
    add: function(text){ //adds a line of text to the log
       logCommand.element.value = logCommand.element.value + text;
       logCommand.element.scrollTop = logCommand.element.scrollHeight //scroll down the log  
@@ -23,7 +25,40 @@ var logCommand = {
          + '\'refresh\'     requests the arduino to send the status of all parameters \n';
            
         logCommand.element.scrollTop = logCommand.element.scrollHeight;
+   },
+   newData: function(newData) {
+      var buffer = this.buffer;
+      buffer = buffer + newData; 
+      //console.log("New Data: " + newData);
+      //console.log("Buffer Start: " + buffer);
+
+      var arr = buffer.split(String.fromCharCode(10)); //Dec Char code for NewLine
+      //console.log("array length: " + arr.length);
+      var remainingBuffer = "";
+      var originalLength = arr.length;
+      //Loop through all the 
+      for (i = originalLength; i > 1; i--){
+        //console.log("length = " + arr.length);
+        //publish("first Command = "+ arr.shift());  //gets the first command and removes it from the array
+         var currentCommand = arr.shift();
+         var splitCommand = currentCommand.split("=");
+
+         //publish command in buffer
+         var updated = tableManager.updateValue(splitCommand[0],splitCommand[1]);
+         if (!document.getElementById("filter").checked || !updated){
+            logCommand.add(currentCommand); 
+         }
+        
+        //console.log("remaining Commands = "+ arr.toString());
+        remainingBuffer = arr.toString();
+        }
+     this.buffer = remainingBuffer;
+     //console.log("Buffer Stop: \"" + this.buffer + "\"");
+
+      
+
    }
+
 }
 //-----END functions for logCommand------//
 
