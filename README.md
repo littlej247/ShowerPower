@@ -12,7 +12,7 @@ Shower Power is an automated shower system that runs on an arduino nano to read 
 ## Feedback
 If you’re able to contribute or see a way to make this better let me know. I’ll take all the help/advice I can get. 
 
-## Licence
+## License
 MIT License
 
 Copyright (c) 2018 Josh H
