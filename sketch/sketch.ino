@@ -1,8 +1,25 @@
 const byte numChars = 32;
 char receivedChars[numChars]; // an array to store the received data
-const String inputNames[] = {};
-volatile int inputValues[] = {0, 0, 0, 0, 0, 0, 0};  //array of pars 2=PSI
+volatile int parValues[] = {0, 0, 0, 0, 0, 0, 0, 0};  //array of pars 2=PSI
 
+const int MODE = 0; //current MODE selected. OFF, PRE:Pre-Heat, ONE:Shower head 1 ON, TWO:Shower head 2 ON, ALL:All shower heads on, TUB:Fill Tub
+const int S1O = 1;  //Solenoind
+const int S2O = 2;
+const int S3O = 3;
+const int S4O = 4;
+const int S5O = 5;
+const int PDT = 6;   //Pre-heat Default Temp in C
+const int PWD = 7;   //Pre-heat Watchdog timer in secconds
+const int PSI = 8;   //Pre-heat Sensor input
+const int PST = 9;   //Pre-heat Sensor Tempratur as calculated in C
+const int PPO = 10;  //Pre-heat PUMP output
+//const int PDT = 11;  //Pre-head Default Temperature
+const int MSI = 12;  //Mixer Sensor Input
+const int MDF = 13;  //Mixer Desired Flow
+const int MFI = 14;
+const int MDT = 15;
+const int MCC = 16;
+const int MHC = 17;
 
 boolean newData = false;
 
@@ -45,17 +62,18 @@ void inputCommands(String par, String val) {
          analogWrite(6, val.toInt());
          Serial.println(par+"="+analogRead(6));
          
-    } else if (par == "so1"){
+    } else if (par == "s1o"){
         digitalWrite(7, val.toInt());
-        Serial.println(par+"="+digitalRead(7));
+        Serial.println("S1O="+String(digitalRead(7)));
         
-    } else if (par == "so2"){
+    } else if (par == "s2o"){
         digitalWrite(8, val.toInt());
-        Serial.println(par+"="+digitalRead(8));
+        Serial.println("S2O="+String(digitalRead(8)));
       
-    } else if (par == "pre"){
+    } else if (par == "ppo"){
+        //String output = "PPO=";
         digitalWrite(12, val.toInt());
-        Serial.println(par+"="+digitalRead(12));
+        Serial.println("PPO="+String(digitalRead(12)));
         
     } else if (par == "ech"){
       Serial.println(val);
@@ -115,10 +133,15 @@ void showNewData() {
 void updateIoInputs() {
   
   //read PreHeat Sensor Input
-  int PSIcurrent = analogRead(A7)/4;
-  if (inputValues[2] < PSIcurrent-1 || inputValues[2] > PSIcurrent+1){
-  //  inputValues[2] = PSIcurrent;  Serial.println("PSI="+String(PSIcurrent));
-  //  delay(5);
+  int PSIcurrent = analogRead(A6);
+  if (parValues[PSI] < PSIcurrent-1 || parValues[PSI] > PSIcurrent+1){
+    parValues[PSI] = PSIcurrent;  Serial.println("PSI="+String(PSIcurrent));
+  }
+    
+  //read PreHeat Sensor Input
+  int MSIcurrent = analogRead(A7);
+  if (parValues[ MSI ] < MSIcurrent-1 || parValues[ MSI ] > MSIcurrent+1){
+    parValues[ MSI ] = MSIcurrent;  Serial.println("MSI="+String(MSIcurrent));
   }
  
 }
@@ -128,6 +151,6 @@ void loop() {                                        //LOOP
   parsInput();
   showNewData();
   updateIoInputs();
-
+  delay(100);
 }
 

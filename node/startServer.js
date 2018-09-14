@@ -9,7 +9,7 @@ const SerialPort = require('serialport');
 //const Readline = SerialPort.parsers.Readline;
 const port = new SerialPort('/dev/ttyUSB0',{
   baudRate: 9600,	
-  parser: new SerialPort.parsers.Readline('\r\n')
+  // parser: new SerialPort.parsers.Readline('\r\n')
 });
 //const parser = new Readline();
 //port.pipe(parser);
@@ -39,7 +39,7 @@ io.on('connection', function (socket) {
 
   //port.on('data', sendDataToWebClient); //testing usb connection delay
 
-  socket.emit('news', { data: '<connected to node>\n'});
+  io.sockets.emit('news', { data: 'NODE: Connection established with web web client\r\n'});
   socket.on('command', function (data) {
     console.log('sending data from web client to USB: ' + data);
     port.write(data+'\n');

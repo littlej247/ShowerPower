@@ -6,9 +6,7 @@ var tableManager = {
            {name: "mode",    description: "current MODE selected. PRE:PreHeat Mode,ONE:Shower head one on,"},
            {name: "led",     description: "test led output"},
            {name: "hot",     description: "analog hot output for testing"},
-           {name: "cold",    description: "analog hot output for testing"},
-           {name: "S1O",    description: "analog hot output for testing"},
-	   {name: "S2O",    description: "analog hot output for testing"}
+           {name: "cold",    description: "analog hot output for testing"}
 	]
      },
      preHeat: {
@@ -16,21 +14,16 @@ var tableManager = {
         parameters: [
            {name: "PDT",    description: "Pre-heat Default Temperature"},
            {name: "PWD",    description: "Pre-heat WatchDog timer in secconds"},
-           {name: "PSI",    description: "PreHeat Sensor Input in volts from 0-5"},
-           {name: "PST",    description: "PreHeat Sensor Tempratur as calculated in C"},
-           {name: "PPO",    description: "PreHeat Pump Putput, 0 = OFF, 1 = ON"},
+           {name: "PSI",    description: "Pre-Heat Sensor Input in volts from 0-5"},
+           {name: "PST",    description: "Pre-Heat Sensor Tempratur as calculated in C"},
+           {name: "PHP",    description: "Pre-Heat Pump, 0 = OFF, 1 = ON"},
            {name: "PDT",    description: "Pre-heat Default Temperature"}
         ]
      },
      mixer: {
         name: "Temprature regulations",
 	parameters: [
-	   {name: "MSI",    description: "Mixer Sensor Input"},
-	   {name: "MMF",    description: "Mixer Max Flow (1-100)"},
-	   {name: "MFI",    description: "Mixer Flow Sensor Input"},
-	   {name: "MDT",    description: "Mixer Desired Temp"},
-	   {name: "MCC",    description: "Mixer COLD calibration. MSI value while at 15c (540 default)"},
-           {name: "MHC",    description: "Mixer HOT calibration. MSI value while at 50c (210 default)"}
+	   {name: "MSI",    description: "Mixed Sensor Input"}
 	]
      }
   }, 
