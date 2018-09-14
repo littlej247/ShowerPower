@@ -5,7 +5,7 @@ var tableManager = {
         parameters: [
            {name: "mode",    description: "current MODE selected"},
            {name: "led",     description: "test led output"},
-           {name: "tes",     description: "Just another test parameter"}
+           {name: "hot",     description: "analog hot output for testing"}
         ]
      },
      preHeat: {
