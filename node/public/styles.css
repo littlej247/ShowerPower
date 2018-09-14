@@ -7,6 +7,9 @@
 table, th, td {
    border: 1px solid black;
 }
+h3 {
+	    margin-bottom: 0;
+    }
 input[type=text] {
     width: 100%;
     padding: 2px 2px;

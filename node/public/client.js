@@ -1,6 +1,7 @@
  tableManager.drawTables();  //Add Parameter Tables to Screen from JSON file
 
 //Sending a GET request, although NOT used in this instance
+/*
 function myGetRequest(){
     theUrl = window.location.href + 'command';
     callback = myCallback();
@@ -17,7 +18,7 @@ function myGetRequest(){
 function myCallback(myMessage){
     console.log(myMessage);
 }
-
+*/
 
 //Receiving data via socket.io
 var socket = io.connect(window.location.href);
@@ -26,6 +27,7 @@ socket.on('news', function (data) {
    //console.log('Data Received: ' + data.data);
 });
 
+/*
 //Transmit command on Enter KeyDown via socket.io
 document.getElementById("command").onkeydown = function() {
    if(event.key === 'Enter') {
@@ -45,15 +47,30 @@ document.getElementById("command").onkeydown = function() {
    }
 };
 
+*/
+
 //Disconnect Message
 socket.on('disconnect', (reason) => {
    console.log("Disconnected from NODE.  Reason: " + reason);
    document.getElementById("connected").innerHTML = "Status: Disconnected from NODE.  Reason: " + reason;
+   logCommand.add("Client: DISCONNECTED from NODE. Reason: " + reason + " \n");
 });
 
 //
 socket.on('connect', () => {
    console.log("Connected to NODE.");
    document.getElementById("connected").innerHTML = "Status: Connected to NODE.";
+   logCommand.add("Client: Connected to NODE.  :) \n");
 });
+
+socket.on('reconnecting', (attemptNumber) => {
+	   console.log("Attempting to reconnect with NODE");
+	   logCommand.add("Client: Attempting to reconnect to NODE. Attempt " + attemptNumber + " \n");
+});
+
+
+
+
+
+
 

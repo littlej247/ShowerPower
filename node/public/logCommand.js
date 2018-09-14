@@ -1,8 +1,14 @@
 //-----functions for logCommand------//
 var logCommand = {
    element: document.getElementById("logCommand"),
-
+   command: document.getElementById("command"),
+   start: function(){
+      this.element.onclick = function(){ document.getElementById("command").focus();  }; 
+      this.command.onkeydown = this.keyDown;
+   },	
    buffer: "",
+
+   commandHistory: [],
 
    add: function(text){ //adds a line of text to the log
       logCommand.element.value = logCommand.element.value + text;
@@ -57,8 +63,29 @@ var logCommand = {
 
       
 
+   },
+   keyDown: function() {
+   //Transmit command on Enter KeyDown via socket.io
+      if(event.key === 'Enter') {
+         if (this.value == 'help'){           //'help' Command
+            logCommand.help();
+                        
+         } else if (this.value == 'clear'){  //'clear' Command
+	    logCommand.clear();
+         }else if (this.value == 'filter'){
+	    document.getElementById("filter").checked = !document.getElementById("filter").checked;
+         }  else  {                         //else  forward command to node server.
+            socket.emit('command', this.value);      
+	 }
+	 this.value = '';
+      } else if (event.key === 'ArrowUp'){
+	 console.log("code for last command here");
+      }
    }
-
 }
+
+logCommand.start();
+
+
 //-----END functions for logCommand------//
 
