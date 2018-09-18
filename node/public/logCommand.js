@@ -35,16 +35,16 @@ var logCommand = {
    newData: function(newData) {
       var buffer = this.buffer;
       buffer = buffer + newData; 
-      //console.log("New Data: " + newData);
-      //console.log("Buffer Start: " + buffer);
+      console.log("New Data: " + newData);
+      console.log("Buffer Start: " + buffer);
 
-      var arr = buffer.split(String.fromCharCode(10)); //Dec Char code for NewLine
-      //console.log("array length: " + arr.length);
-      var remainingBuffer = "";
+      var arr = buffer.split(String.fromCharCode(10)); //Dec Char code for NewLine,Removes the \n but keeps the \r to be used to <br> the feed up
+      
+	//   console.log("array length: " + arr.length);
       var originalLength = arr.length;
       //Loop through all the 
       for (i = originalLength; i > 1; i--){
-        //console.log("length = " + arr.length);
+      //  console.log("length = " + arr.length);
         //publish("first Command = "+ arr.shift());  //gets the first command and removes it from the array
          var currentCommand = arr.shift();
          var splitCommand = currentCommand.split("=");
@@ -55,13 +55,9 @@ var logCommand = {
             logCommand.add(currentCommand); 
          }
         
-        //console.log("remaining Commands = "+ arr.toString());
-        remainingBuffer = arr.toString();
-        }
-     this.buffer = remainingBuffer;
-     //console.log("Buffer Stop: \"" + this.buffer + "\"");
-
-      
+      }
+      this.buffer = arr.toString(); 
+      console.log("Buffer Stop: \"" + this.buffer + "\"");
 
    },
    keyDown: function() {
