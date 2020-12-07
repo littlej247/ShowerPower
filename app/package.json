@@ -1,0 +1,29 @@
+{
+  "name": "showerpower",
+  "version": "0.0.1",
+  "description": "Shower automation and control system",
+  "main": "startServer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/littlej247/ShowerPower.git"
+  },
+  "keywords": [
+    "arduino",
+    "node",
+    "pwm",
+    "serial",
+    "io",
+    "control",
+    "tempreture",
+    "regulation"
+  ],
+  "author": "Josh Haughton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/littlej247/ShowerPower/issues"
+  },
+  "homepage": "https://github.com/littlej247/ShowerPower#readme"
+}
